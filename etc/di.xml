@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">    
+    <preference for="DurableCode\ProductLabels\Api\Data\ProductLabelInterface" type="DurableCode\ProductLabels\Model\ProductLabel" />
+    <preference for="DurableCode\ProductLabels\Api\ProductLabelRepositoryInterface" type="DurableCode\ProductLabels\Model\ProductLabelRepository" />
+    <preference for="DurableCode\ProductLabels\Api\ProductLabelOptionRepositoryInterface" type="DurableCode\ProductLabels\Model\ProductLabelOptionRepository" />
+    
+    <virtualType name="labelsSearchResult" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="const">DurableCode\ProductLabels\Model\ResourceModel\ProductLabel::TABLE_NAME</argument>
+            <argument name="resourceModel" xsi:type="string">DurableCode\ProductLabels\Model\ResourceModel\ProductLabel</argument>
+        </arguments>
+    </virtualType>
+    
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="product_label_listing_data_source" xsi:type="string">labelsSearchResult</item>
+            </argument>
+        </arguments>
+    </type>
+</config>
