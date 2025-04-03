@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="labels" resource="default" engine="innodb" comment="Product Labels Entity">
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" identity="true" comment="Label ID"/>
+        <column xsi:type="varchar" name="label_text" nullable="false" length="40" comment="Label text"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="label_id"/>
+        </constraint>
+    </table>
+    
+    <table name="label_options" resource="default" engine="innodb" comment="Options Many-To-One">
+        <column xsi:type="int" name="option_id" unsigned="true" nullable="false" identity="true" comment="Option ID"/>            
+        <column xsi:type="int" name="label_id" unsigned="true" nullable="false" comment="Label ID" />
+        <column xsi:type="varchar" name="name" nullable="false" length="30" comment="Option Name"/>
+        <column xsi:type="varchar" name="value" nullable="false" length="100" comment="Option Value"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="option_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="LABELS_LABEL_ID_LABEL_OPTION_LABEL_ID"
+            table="label_options" column="label_id" referenceTable="labels"
+            referenceColumn="label_id" onDelete="CASCADE"/>
+    </table>
+</schema>

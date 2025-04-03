@@ -1,0 +1,23 @@
+{
+    "labels": {
+        "column": {
+            "label_id": true,
+            "label_text": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "label_options": {
+        "column": {
+            "option_id": true,
+            "label_id": true,
+            "name": true,
+            "value": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "LABEL_OPTIONS_LABEL_ID_LABELS_LABEL_ID": true
+        }
+    }
+}
