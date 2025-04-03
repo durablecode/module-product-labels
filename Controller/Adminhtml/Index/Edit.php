@@ -47,9 +47,9 @@ class Edit extends Action implements HttpGetActionInterface
             }
             
             $resultPage->getConfig()->getTitle()
-            ->prepend($productLabel->getId() ? $productLabel->getLabelText() : __('Product Label'));
+                ->prepend($productLabel->getLabelText());
         }
-
+        
         return $resultPage;
     }
     
