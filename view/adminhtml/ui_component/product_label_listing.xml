@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">product_label_listing.product_label_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="add" class="DurableCode\ProductLabels\Block\Adminhtml\ProductLabel\AddButton"/>
+        </buttons>
+        <spinner>product_label_columns</spinner>
+        <deps>
+            <dep>product_label_listing.product_label_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="product_label_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">label_id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>DurableCode_ProductLabels::list</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="product_label_listing_data_source">
+            <settings>
+                <requestFieldName>label_id</requestFieldName>
+                <primaryFieldName>label_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters" />
+        <massaction name="listing_massaction"
+                    component="Magento_Ui/js/grid/tree-massactions"
+                    class="\Magento\Catalog\Ui\Component\Product\MassAction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Delete selected labels?</message>
+                        <title translate="true">Delete labels</title>
+                    </confirm>
+                    <url path="*/*/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="product_label_columns" class="DurableCode\ProductLabels\Ui\Component\Listing\Columns\ProductLabelAction">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">product_label_listing.product_label_listing.product_label_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">edit</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids" sortOrder="0">
+            <settings>
+                <indexField>label_id</indexField>
+            </settings>
+        </selectionsColumn>
+        <column name="label_id" sortOrder="10">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="label_text" sortOrder="20">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Label</label>
+            </settings>
+        </column>
+        <actionsColumn name="actions" class="DurableCode\ProductLabels\Ui\Component\Listing\Columns\ProductLabelAction" sortOrder="200">
+            <settings>
+                <indexField>label_id</indexField>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

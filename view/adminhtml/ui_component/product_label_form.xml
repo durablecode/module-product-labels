@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/Ui/etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">product_label_form.product_label_form_data_source</item>
+            <item name="deps" xsi:type="string">product_label_form.product_label_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Sample Form</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+
+    <settings>
+        <buttons>
+            <button name="save" class="DurableCode\ProductLabels\Block\Adminhtml\ProductLabel\Form\SaveButton"/>
+            <button name="delete" class="Magento\Cms\Block\Adminhtml\Page\Edit\DeleteButton"/>
+            <button name="back" class="Magento\Cms\Block\Adminhtml\Page\Edit\BackButton"/>
+        </buttons>
+        <namespace>product_label_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>product_label_form.label_form_data_source</dep>
+        </deps>
+    </settings>
+    
+    <dataSource name="product_label_form_data_source">       
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="*/*/save"/>
+        </settings>
+        <dataProvider class="DurableCode\ProductLabels\Model\DataProvider" name="product_label_form_data_source">
+            <settings>
+                <requestFieldName>label_id</requestFieldName>
+                <primaryFieldName>label_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="label_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>label_id</dataScope>
+            </settings>
+        </field>
+        <field name="label_text">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="label" xsi:type="string">Label</item>
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">general</item>
+                </item>
+            </argument>
+        </field>
+    </fieldset>
+    <fieldset name="label_options_fieldset" component="Magento_Catalog/js/components/visible-on-option/fieldset" sortOrder="10">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="valuesForOptions" xsi:type="array">
+                    <item name="select" xsi:type="string">select</item>
+                </item>
+            </item>
+        </argument>
+        <settings>
+            <!--<collapsible>true</collapsible>-->
+            <label translate="true">Options</label>
+        </settings>
+    <dynamicRows name="label_options">
+        <settings>
+            <addButtonLabel translate="true">Add Option</addButtonLabel>
+            <additionalClasses>
+                <class name="admin__field-wide">true</class>
+            </additionalClasses>
+            <componentType>dynamicRows</componentType>
+        </settings>
+        <container name="record" component="Magento_Ui/js/dynamic-rows/record">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="isTemplate" xsi:type="boolean">true</item>
+                    <item name="is_collection" xsi:type="boolean">true</item>
+                    <item name="componentType" xsi:type="string">container</item>
+                </item>
+            </argument>
+            <field name="name" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="fit" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label>Name</label>
+                </settings>
+            </field>
+            <field name="value" formElement="input">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="fit" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <settings>
+                    <validation>
+                        <rule name="required-entry" xsi:type="boolean">true</rule>
+                    </validation>
+                    <dataType>text</dataType>
+                    <label>Value</label>
+                </settings>
+            </field>
+            <field name="option_id" component="Magento_Catalog/js/form/element/input" formElement="input">
+                <settings>
+                    <dataType>text</dataType>
+                    <visible>false</visible>
+                </settings>
+            </field>
+            <actionDelete template="Magento_Backend/dynamic-rows/cells/action-delete">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="fit" xsi:type="boolean">false</item>
+                    </item>
+                </argument>
+                <settings>
+                    <dataType>text</dataType>
+                    <label>Actions</label>
+                    <componentType>actionDelete</componentType>
+                </settings>
+            </actionDelete>
+        </container>
+    </dynamicRows>
+    </fieldset>
+ </form>
