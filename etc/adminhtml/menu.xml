@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="DurableCode_ProductLabels::extensions" title="DurableCode Extensions" translate="title" module="DurableCode_ProductLabels" sortOrder="32" resource="DurableCode_ProductLabels::core"/>
+        <add id="DurableCode_ProductLabels::labels" title="Labels" translate="title" module="DurableCode_ProductLabels" sortOrder="10" parent="DurableCode_ProductLabels::extensions"  resource="DurableCode_ProductLabels::labels"/>
+        <add id="DurableCode_ProductLabels::list" title="List" translate="title" module="DurableCode_ProductLabels" sortOrder="10" parent="DurableCode_ProductLabels::labels" action="product_labels/index/index" resource="DurableCode_ProductLabels::list"/>
+    </menu>
+</config>
